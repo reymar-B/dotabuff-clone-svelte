@@ -1,9 +1,15 @@
 <script>
-    export let data;
 
-    let players = data.players
+    export let data;
+    let players = data.players;
+
+    import Fa from 'svelte-fa';
+    // import { faFlag } from '@fortawesome/free-solid-svg-icons';
+    import { faFacebook, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+
   
 </script>
+
 
 
 <div class="flex flex-col bg-bg-main text-xs">
@@ -28,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-primary">
-{ #each players as player}
+                { #each players as player}
                     <tr class="even:bg-tertiary odd:bg-secondary h-[3rem]">
                         <td class="pl-4 flex items-center">
                             <div class="w-[2.5rem] pt-[3px]">
@@ -51,11 +57,27 @@
                         <td class="pl-4">{ player.time_played }
                             <div class="bg-neutral-100 h-[4px]"></div>
                         </td>
-                        <td class="pl-4">{ player.soc_med.has_fb }
-                            <div class=""></div>
+                        <td class="pl-4">
+                            <div class="flex items-top">
+                                { #if player.soc_med.has_fb }
+                                    <div class="pl-1 text-lg text-blue-500">
+                                        <Fa icon={faFacebook} /> 
+                                    </div>
+                                { /if } 
+                                { #if player.soc_med.has_twitter } 
+                                    <div class="pl-1 text-lg text-sky-400">
+                                        <Fa icon={faTwitter} /> 
+                                    </div>
+                                { /if }
+                                { #if player.soc_med.has_ig }
+                                    <div class="pl-1 text-lg text-orange-700">
+                                        <Fa icon={faInstagram} /> 
+                                    </div>
+                                { /if }
+                            </div>
                         </td>
                     </tr>
-{/each}
+                {/each}
                 </tbody>
             </table>
         </div>
